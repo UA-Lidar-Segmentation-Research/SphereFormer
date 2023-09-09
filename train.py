@@ -29,6 +29,7 @@ from util.lr import MultiStepWithWarmup, PolyLR, PolyLRwithWarmup, Constant
 from util.nuscenes import nuScenes
 from util.semantic_kitti import SemanticKITTI
 from util.waymo import Waymo
+from util.rellis import RELLIS
 
 from functools import partial
 import pickle
@@ -250,7 +251,27 @@ def main_worker(gpu, ngpus_per_node, argss):
             use_tta=args.use_tta,
             vote_num=args.vote_num,
         )
-
+    elif args.data_name == 'rellis':
+        train_data = RELLIS(args.data_root,
+            voxel_size=args.voxel_size,
+            split='train',
+            return_ref=True,
+            label_mapping=args.label_mapping,
+            rotate_aug=True,
+            flip_aug=True,
+            scale_aug=True,
+            scale_params=[0.95,1.05],
+            transform_aug=True,
+            trans_std=[0.1, 0.1, 0.1],
+            elastic_aug=False,
+            elastic_params=[[0.12, 0.4], [0.8, 3.2]],
+            ignore_label=args.ignore_label,
+            voxel_max=args.voxel_max,
+            xyz_norm=args.xyz_norm,
+            pc_range=args.get("pc_range", None),
+            use_tta=args.use_tta,
+            vote_num=args.vote_num,
+        )
     elif args.data_name == 'waymo':
         train_data = Waymo(args.data_root, 
             voxel_size=args.voxel_size, 
@@ -295,6 +316,7 @@ def main_worker(gpu, ngpus_per_node, argss):
 
     val_transform = None
     args.use_tta = getattr(args, "use_tta", False)
+    print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"+args.data_name)
     if args.data_name == 'nuscenes':
         val_data = nuScenes(data_path=args.data_root, 
             info_path_list=['nuscenes_seg_infos_1sweeps_val.pkl'], 
@@ -319,6 +341,19 @@ def main_worker(gpu, ngpus_per_node, argss):
             transform_aug=args.use_tta, 
             xyz_norm=args.xyz_norm, 
             pc_range=args.get("pc_range", None), 
+            use_tta=args.use_tta,
+            vote_num=args.vote_num,
+        )
+    elif args.data_name == 'rellis':
+        val_data = RELLIS(data_path=args.data_root,
+            voxel_size=args.voxel_size,
+            split='val',
+            rotate_aug=args.use_tta,
+            flip_aug=args.use_tta,
+            scale_aug=args.use_tta,
+            transform_aug=args.use_tta,
+            xyz_norm=args.xyz_norm,
+            pc_range=args.get("pc_range", None),
             use_tta=args.use_tta,
             vote_num=args.vote_num,
         )

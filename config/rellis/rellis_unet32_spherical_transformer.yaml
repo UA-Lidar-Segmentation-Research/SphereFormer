@@ -1,7 +1,7 @@
 DATA:
-  data_name: semantic_kitti
+  data_name: rellis
   data_root: /dataset
-  label_mapping: util/semantic-kitti.yaml
+  label_mapping: util/rellis.yaml
   classes: 19
   fea_dim: 6
   voxel_size: [0.05, 0.05, 0.05]
@@ -47,8 +47,8 @@ TRAIN:
 
   power: 0.9
   use_amp: True
-  train_gpu: [0,1]
-  workers: 16  # data loader workers 
+  train_gpu: [0, 1]
+  workers: 16  # data loader workers
   batch_size: 8 # batch size for training
   batch_size_val: 8 # batch size for validation during training, memory and speed tradeoff
   base_lr: 0.006 
@@ -62,7 +62,7 @@ TRAIN:
   manual_seed: 123
   print_freq: 10
   save_freq: 1
-  save_path: runs/semantic_kitti_unet32_spherical_transformer
+  save_path: runs/rellis_unet32_spherical_transformer
   weight:  # path to initial weight (default: none)
   resume:  # path to latest checkpoint (default: none)
   evaluate: True  # evaluate on validation set, extra gpu memory needed and small batch_size_val is recommend
