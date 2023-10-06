@@ -1,0 +1,1 @@
+python train.py --config config/rellis/test_rellis_unet32_spherical_transformer.yaml
