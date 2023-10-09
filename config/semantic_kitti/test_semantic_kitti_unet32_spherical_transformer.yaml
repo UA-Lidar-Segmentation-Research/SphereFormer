@@ -63,7 +63,7 @@ TRAIN:
   print_freq: 10
   save_freq: 1
   save_path: runs/semantic_kitti_unet32_spherical_transformer
-  weight: results/sk_sphere_models/model_best.pth  # path to initial weight (default: none)
+  weight: semantic_kitti_unet32_spherical_transformer/model/model_best.pth  # path to initial weight (default: none)
   resume:  # path to latest checkpoint (default: none)
   evaluate: True  # evaluate on validation set, extra gpu memory needed and small batch_size_val is recommend
   eval_freq: 1
