@@ -2,7 +2,7 @@ DATA:
   data_name: rellis
   data_root: /dataset
   label_mapping: util/rellis.yaml
-  classes: 19
+  classes: 14
   fea_dim: 6
   voxel_size: [0.05, 0.05, 0.05]
   voxel_max: 120000 
@@ -25,9 +25,8 @@ TRAIN:
   rel_value: True
   drop_path_rate: 0.3
   max_batch_points: 1000000
-  class_weight: [ 3.1557,  8.7029,  7.8281,  6.1354,  6.3161,  7.9937,  8.9704,
-                          10.1922,  1.6155,  4.2187,  1.9385,  5.5455,  2.0198,  2.6261,  1.3212,
-                          5.1102,  2.5492,  5.8585,  7.3929]
+  class_weight: [ 43.7376,  25.5296,  10.4829,  0.0022,  0.0219,  0.0109 0.0542,
+                          1.0394, 0.1554, 16.5074, 1.0705, 0.3426, 0.1461, 0.5671, 0.3321]
   xyz_norm: False
   pc_range: [[-51.2, -51.2, -4], [51.2, 51.2, 2.4]]
   window_size_sphere: [2, 2, 80]
